@@ -1,0 +1,65 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * The game board. The board had a paddle that can move.
+ * 
+ * @author mik
+ * @version 1.0
+ */
+public class Board extends World
+{
+    private Paddle paddle;
+
+    private static final int GAP = 15;
+    private static final int GAP2 = 20;
+    /**
+     * Constructor for objects of class Board.
+     * 
+     */
+    public Board()
+    {    
+        super(460, 460, 1);
+
+        // Set the paint order of objects in the world.
+        setPaintOrder(Ball.class,Smoke.class);
+        setImage(Draw2);
+        // Add a counter object to the world.
+        Counter counter = new Counter();
+        addObject(counter, 106, 445);
+        // Add a paddle object to the world.
+        paddle =  new Paddle(counter);
+        addObject(paddle, getWidth()/2, getHeight()-40);
+        // Center the Paddle object horizontally and 40 pixels from the bottom.
+        createBlocks();
+    }
+
+    public void createBlocks()
+    {
+        int x;
+        int y = 30;
+        Block block = new Block();
+        int width = block. getImage().getWidth();
+        int height = block.getImage().getHeight();
+
+        for (int rows = 4; rows > 0; rows--)
+        {
+            x = 42;
+            for (int columns = 6; columns > 0; columns--)
+            {
+                addObject(new Block(), x, y);
+                x = x +width +GAP;
+            }
+            y = y + 40;
+        }
+    }
+
+    public void act()
+    {
+
+    }
+
+    public void ballIsOut()
+    {
+        paddle.newBall();
+    }
+}
